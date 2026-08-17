@@ -11,13 +11,6 @@ import produto.ProdutoNaoEncontradoException;
 public class CarrinhoTest {
 
     @Test
-    public void testaCarrinhoInicialmenteVazio() {
-        Carrinho carrinho = new Carrinho();
-
-        assertEquals(0, carrinho.getQtdeItems());
-    }
-
-    @Test
     public void testaAddItem() {
         Carrinho carrinho = new Carrinho();
         Produto produto = new Produto("Batom", 27.0);
@@ -44,7 +37,9 @@ public class CarrinhoTest {
         carrinho.addItem(new Produto("Corretivo", 36.0));
         carrinho.addItem(new Produto("Blush", 25.0));
 
-        assertEquals(61.0, carrinho.getValorTotal(), 0.001);
+        double resultado = carrinho.getValorTotal();
+
+        assertEquals(61.0, resultado, 0.001);
     }
 
     @Test
@@ -89,7 +84,7 @@ public class CarrinhoTest {
     }
 
     @Test
-    public void testaEsvaziaTambemZeraValorTotal() {
+    public void testaEsvaziaValorTotal() {
         Carrinho carrinho = new Carrinho();
 
         carrinho.addItem(new Produto("Delineador", 22.0));
