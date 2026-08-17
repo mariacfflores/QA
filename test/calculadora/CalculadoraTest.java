@@ -1,53 +1,202 @@
 package calculadora;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Classe para teste da calculadora")
 public class CalculadoraTest {
-	
-	private Calculadora calc;
-	
-	@BeforeEach
-	public void inicializa() {
-		calc = new Calculadora();
-	}
-	
-	@DisplayName("Testa a soma de dois números")
-	@Test
-	public void testSomaDoisNumeros() {
-		int soma = calc.soma(4, 5);		
-		Assertions.assertEquals(9, soma);		
-	}
-	
-	@Test
-	public void testDivisaoDoisNumeros() {
-		int divisao = calc.divisao(8, 4);
-		assertTrue(divisao == 2);
-	}
-	
-	@Test
-	public void testDivisaoPorZero() {
-		try {
-			int divisao = calc.divisao(8, 0);
-			fail("Exceção não lançada");
-		}catch (ArithmeticException e) {
-			assertEquals("/ by zero", e.getMessage());
-		}		
-	}
-	
-	@Test
-	public void testDivisaoPorZeroComAssertThrows() {
-		assertThrows(ArithmeticException.class,
-				() -> calc.divisao(8, 0));
-	}
 
+    // =========================
+    // SOMA
+    // =========================
+
+    @Test
+    public void testaSoma() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.soma(37, 23);
+
+        assertEquals(60, resultado);
+    }
+
+    @Test
+    public void testaSomaComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.soma(5, -3);
+
+        assertEquals(2, resultado);
+    }
+
+    // =========================
+    // SUBTRAÃ‡ÃƒO
+    // =========================
+
+    @Test
+    public void testaSubtracao() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.subtracao(50, 7);
+
+        assertEquals(43, resultado);
+    }
+
+    @Test
+    public void testaSubtracaoComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.subtracao(5, -3);
+
+        assertEquals(8, resultado);
+    }
+
+    // =========================
+    // MULTIPLICAÃ‡ÃƒO
+    // =========================
+
+    @Test
+    public void testaMultiplicacao() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.multiplicacao(5, 6);
+
+        assertEquals(30, resultado);
+    }
+
+    @Test
+    public void testaMultiplicacaoPorZero() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.multiplicacao(10, 0);
+
+        assertEquals(0, resultado);
+    }
+
+    // =========================
+    // DIVISÃƒO
+    // =========================
+
+    @Test
+    public void testaDivisao() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.divisao(40, 2);
+
+        assertEquals(20, resultado);
+    }
+
+    @Test
+    public void testaDivisaoInteira() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.divisao(10, 3);
+
+        assertEquals(3, resultado);
+    }
+
+    @Test
+    public void testaDivisaoPorZero() {
+        Calculadora calc = new Calculadora();
+
+        assertThrows(
+            ArithmeticException.class,
+            () -> calc.divisao(10, 0)
+        );
+    }
+
+    // =========================
+    // SOMATORIA
+    // =========================
+
+    @Test
+    public void testaSomatoria() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.somatoria(6);
+
+        assertEquals(21, resultado);
+    }
+
+    @Test
+    public void testaSomatoriaComZero() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.somatoria(0);
+
+        assertEquals(0, resultado);
+    }
+
+    @Test
+    public void testaSomatoriaComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.somatoria(-5);
+
+        assertEquals(0, resultado);
+    }
+
+    // =========================
+    // EH POSITIVO
+    // =========================
+
+    @Test
+    public void testaEhPositivo() {
+        Calculadora calc = new Calculadora();
+
+        boolean resultado = calc.ehPositivo(12);
+
+        assertTrue(resultado);
+    }
+
+    @Test
+    public void testaEhPositivoComZero() {
+        Calculadora calc = new Calculadora();
+
+        boolean resultado = calc.ehPositivo(0);
+
+        assertTrue(resultado);
+    }
+
+    @Test
+    public void testaEhPositivoComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        boolean resultado = calc.ehPositivo(-10);
+
+        assertFalse(resultado);
+    }
+
+    // =========================
+    // COMPARA
+    // =========================
+
+    @Test
+    public void testaComparaMenor() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.compara(8, 15);
+
+        assertEquals(-1, resultado);
+    }
+
+    @Test
+    public void testaComparaMaior() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.compara(15, 8);
+
+        assertEquals(1, resultado);
+    }
+
+    @Test
+    public void testaComparaIgual() {
+        Calculadora calc = new Calculadora();
+
+        int resultado = calc.compara(8, 8);
+
+        assertEquals(0, resultado);
+    }
 }

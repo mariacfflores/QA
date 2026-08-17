@@ -1,48 +1,33 @@
-package basico;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CicloVidaTest {
-	
-	@BeforeAll
-	public static void inicializaTodos() {
-		System.out.println("@BeforeAll");
-	}
-	
-	@BeforeEach
-	public void inicializa() {
-		System.out.println("@BeforeEach");
-	}
-	
-	@Test
-	public void test1() {
-		System.out.println("@test1");
-	}
-	
-	@Test
-	public void test2() {
-		System.out.println("@test2");
-	}
-	
-	@Test
-	public void test3() {
-		System.out.println("@test3");
-	}
-	
-	@AfterEach
-	public void finaliza() {
-		System.out.println("@AfterEach");
-	}		
-	
-	@AfterAll
-	public static void finalizaTodos() {
-		System.out.println("@AfterAll");
-	}
-	
+import calculadora.Calculadora;
+import carrinho.Carrinho;
+import produto.Produto;
 
+public class BasicoTest {
 
+    @Test
+    public void testaCalculadoraCriada() {
+        Calculadora calc = new Calculadora();
+
+        assertTrue(calc != null);
+    }
+
+    @Test
+    public void testaCarrinhoInicialmenteVazio() {
+        Carrinho carrinho = new Carrinho();
+
+        assertEquals(0, carrinho.getQtdeItems());
+    }
+
+    @Test
+    public void testaProdutoCriado() {
+        Produto produto = new Produto("Batom", 27.0);
+
+        assertEquals("Batom", produto.getNome());
+        assertEquals(27.0, produto.getPreco());
+    }
 }

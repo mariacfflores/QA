@@ -1,49 +1,56 @@
 package produto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.*;
-
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ProdutoTest {
-	
-	Produto livro;
-	
-	@BeforeEach
-	public void inicializa() {
-		livro = new Produto("Introdução ao Teste de Software", 100.00);
-	}
-	
-	@Test
-	public void testCriaProduto() {
-		Assertions.assertAll("livro",
-				() -> assertEquals("Introdução ao Teste de Software", livro.getNome()),
-				() -> assertTrue(100.00 == livro.getPreco())						
-				);
-	}
-	
-	@Test
-	public void testProdutosIguais() {
-		Produto livro2 = new Produto("Introdução ao Teste de Software", 90.00);
-		
-		assertNotSame(livro, livro2);
-		
-	}
-	
-	@Test
-	public void assertionComHamcrestMatcher() {
-		assertThat(livro.getPreco(), equalTo(100.00));
-		assertThat(livro.getNome(), notNullValue());
-		assertThat(livro.getNome(), containsString("Teste"));
-		assertThat(livro, instanceOf(Produto.class));
-	}
 
+    @Test
+    public void testaCriacaoProduto() {
+        Produto produto = new Produto("Batom", 27.0);
+
+        assertEquals("Batom", produto.getNome());
+        assertEquals(27.0, produto.getPreco());
+    }
+
+    @Test
+    public void testaGetNome() {
+        Produto produto = new Produto("Base", 43.0);
+
+        assertEquals("Base", produto.getNome());
+    }
+
+    @Test
+    public void testaSetNome() {
+        Produto produto = new Produto("Batom", 27.0);
+
+        produto.setNome("Gloss");
+
+        assertEquals("Gloss", produto.getNome());
+    }
+
+    @Test
+    public void testaGetPreco() {
+        Produto produto = new Produto("Rimel", 31.0);
+
+        assertEquals(31.0, produto.getPreco());
+    }
+
+    @Test
+    public void testaSetPreco() {
+        Produto produto = new Produto("Rimel", 31.0);
+
+        produto.setPreco(35.0);
+
+        assertEquals(35.0, produto.getPreco());
+    }
+
+    @Test
+    public void testaProdutosComMesmoNome() {
+        Produto produto1 = new Produto("Batom", 27.0);
+        Produto produto2 = new Produto("Batom", 35.0);
+
+        assertEquals(produto1, produto2);
+    }
 }
