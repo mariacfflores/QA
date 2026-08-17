@@ -1,53 +1,140 @@
 package calculadora;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Classe para teste da calculadora")
 public class CalculadoraTest {
-	
-	private Calculadora calc;
-	
-	@BeforeEach
-	public void inicializa() {
-		calc = new Calculadora();
-	}
-	
-	@DisplayName("Testa a soma de dois números")
-	@Test
-	public void testSomaDoisNumeros() {
-		int soma = calc.soma(4, 5);		
-		Assertions.assertEquals(9, soma);		
-	}
-	
-	@Test
-	public void testDivisaoDoisNumeros() {
-		int divisao = calc.divisao(8, 4);
-		assertTrue(divisao == 2);
-	}
-	
-	@Test
-	public void testDivisaoPorZero() {
-		try {
-			int divisao = calc.divisao(8, 0);
-			fail("Exceção não lançada");
-		}catch (ArithmeticException e) {
-			assertEquals("/ by zero", e.getMessage());
-		}		
-	}
-	
-	@Test
-	public void testDivisaoPorZeroComAssertThrows() {
-		assertThrows(ArithmeticException.class,
-				() -> calc.divisao(8, 0));
-	}
 
+    @Test
+    public void testaSoma() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(60, calc.soma(37, 23));
+    }
+
+    @Test
+    public void testaSomaComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(2, calc.soma(5, -3));
+    }
+
+    @Test
+    public void testaSubtracao() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(43, calc.subtracao(50, 7));
+    }
+
+    @Test
+    public void testaSubtracaoComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(8, calc.subtracao(5, -3));
+    }
+
+    @Test
+    public void testaMultiplicacao() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(30, calc.multiplicacao(5, 6));
+    }
+
+    @Test
+    public void testaMultiplicacaoPorZero() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(0, calc.multiplicacao(10, 0));
+    }
+
+    @Test
+    public void testaDivisao() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(20, calc.divisao(40, 2));
+    }
+
+    @Test
+    public void testaDivisaoInteira() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(3, calc.divisao(10, 3));
+    }
+
+    @Test
+    public void testaDivisaoPorZero() {
+        Calculadora calc = new Calculadora();
+
+        assertThrows(
+            ArithmeticException.class,
+            () -> calc.divisao(10, 0)
+        );
+    }
+
+    @Test
+    public void testaSomatoria() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(21, calc.somatoria(6));
+    }
+
+    @Test
+    public void testaSomatoriaComZero() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(0, calc.somatoria(0));
+    }
+
+    @Test
+    public void testaSomatoriaComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(0, calc.somatoria(-5));
+    }
+
+    @Test
+    public void testaEhPositivo() {
+        Calculadora calc = new Calculadora();
+
+        assertTrue(calc.ehPositivo(12));
+    }
+
+    @Test
+    public void testaEhPositivoComZero() {
+        Calculadora calc = new Calculadora();
+
+        assertTrue(calc.ehPositivo(0));
+    }
+
+    @Test
+    public void testaEhPositivoComNumeroNegativo() {
+        Calculadora calc = new Calculadora();
+
+        assertFalse(calc.ehPositivo(-10));
+    }
+
+    @Test
+    public void testaComparaMenor() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(-1, calc.compara(8, 15));
+    }
+
+    @Test
+    public void testaComparaMaior() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(1, calc.compara(15, 8));
+    }
+
+    @Test
+    public void testaComparaIgual() {
+        Calculadora calc = new Calculadora();
+
+        assertEquals(0, calc.compara(8, 8));
+    }
 }
